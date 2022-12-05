@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Leiaute from "./pages/Leiaute";
+import Principal from "./pages/Principal";
+import NotFound from "./pages/NotFound";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import Alunos from "./pages/alunos/Listagem";
+import Cadastro from "./pages/alunos/Cadastro";
+import Alteracao from "./pages/alunos/Alteracao";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Leiaute />}>
+                        <Route index element={<Principal />} />
+                        <Route path="alunos">
+                            <Route index element={<Alunos />} />
+                            <Route path="cadastrar" element={<Cadastro />} />
+                            <Route path="alterar/:id" element={<Alteracao />} />
+                        </Route>
+                        <Route path="*" element={<NotFound />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </>
+    );
+};
 
 export default App;

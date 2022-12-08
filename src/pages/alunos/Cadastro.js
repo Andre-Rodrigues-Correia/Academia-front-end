@@ -39,12 +39,8 @@ const Cadastro = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        validator
-            .validate(inputs, { abortEarly: false })
-            .then(() => {
-                setErrors({});
                 axios
-                    .post("http://localhost:8080/api/alunos", inputs)
+                    .post("http://localhost:8080/api/alunos", inputs, { withCredentials: true })
                     .then((response) => {
                         if (response.status === 201) {
                             modal.show();
@@ -55,13 +51,6 @@ const Cadastro = () => {
                     .catch((error) => {
                         console.log(error);
                     });
-            })
-            .catch((error) => {
-                setErrors({});
-                error.inner.forEach((err) => {
-                    setErrors((prevErrors) => ({ ...prevErrors, [err.path]: err.message }));
-                });
-            });
     }
 
     function closeModalAndRedirect() {

@@ -11,7 +11,7 @@ const Listagem = () => {
 
     const carregarAlunos = () => {
         axios
-            .get("http://localhost:8080/api/alunos")
+            .get("http://localhost:8080/api/alunos", { withCredentials: true })
             .then((response) => {
                 setAlunos(response.data);
                 setLoading(false);

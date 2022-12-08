@@ -26,14 +26,11 @@ const Login = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        validator
-            .validate(inputs, { abortEarly: false })
-            .then(() => {
-                setErrors({});
-                axios
-                    .post("http://localhost:8080/api/auth/login", inputs)
+          axios
+              .post("http://localhost:8080/api/auth/instrutor/login", inputs, { withCredentials: true})
                     .then((response) => {
                         if (response.status === 200) {
+                            console.log(response)
                             console.log("Login efetuado com sucesso!");
                             navigate("/alunos");
                         } else {
@@ -42,8 +39,7 @@ const Login = () => {
                     })
                     .catch((error) => {
                         console.log(error);
-                    });
-            })
+                    })
             .catch((error) => {
                 setErrors({});
                 error.inner.forEach((err) => {
@@ -60,7 +56,7 @@ const Login = () => {
                         <h1>Login</h1>
                     </div>
 
-                    <form onSubmit={handleSubmit} noValidate autoComplete="off">
+                    <form onSubmit={handleSubmit}>
                         <div>
                             <FormInput type="email" field="email" placeholder="fulano@email.com" label="E-mail" onChange={handleChange} value={inputs?.email} error={errors?.email} />
                         </div>

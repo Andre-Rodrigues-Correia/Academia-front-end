@@ -31,7 +31,7 @@ const FormAluno = ({ handleChange, inputs, errors, isNew }) => {
                     />
                 </div>
                 <div className="col-6 col-md-3">
-                    <CleaveInput type="tel" field="telefone" placeholder="(99) 99999-9999" label="Telefone (com DDD)" onChange={handleChange} options={{ blocks: [0, 2, 0, 5, 4], delimiters: ["(", ")", " ", "-"], onlyNumbers: true }} value={inputs?.telefone} error={errors?.telefone} />
+                    <CleaveInput type="tel" field="telefone" placeholder="(99) 99999-9999" label="Telefone (com DDD)" onChange={handleChange} options={{ blocks: [0, 2, 0, 5, 4], delimiters: ["(", ")", " ", "-"], numericOnly: true }} value={inputs?.telefone} error={errors?.telefone} />
                 </div>
                 <div className="col-6 col-md-6">
                     <FormInput type="email" field="email" placeholder="fulano@email.com" label="E-mail" onChange={handleChange} value={inputs?.email} error={errors?.email} />

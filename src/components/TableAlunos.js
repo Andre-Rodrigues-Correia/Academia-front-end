@@ -18,7 +18,7 @@ const TableAlunos = ({ alunos, setAlunos }) => {
 
     function excluirAluno() {
         axios
-            .delete(`http://localhost:8080/api/alunos/${alunoExcluir._id}`)
+            .delete(`http://localhost:8080/api/alunos/${alunoExcluir._id}`, { withCredentials: true })
             .then((data) => {
                 const alunosAtualizados = alunos.filter((aluno) => aluno._id !== alunoExcluir._id);
                 setAlunos(alunosAtualizados);
@@ -55,7 +55,7 @@ const TableAlunos = ({ alunos, setAlunos }) => {
                             <td>{new Date(aluno.dataNascimento.substring(0, 10) + "T12:00:00").toLocaleDateString()}</td>
                             <td>{aluno.telefone}</td>
                             <td>{aluno.email}</td>
-                            <td>{aluno.sexo === "M" ? "Masculino" : "Feminino"}</td>
+                            <td>{aluno.sexo === "M" ? "Masculino" : aluno.sexo === "F" ? "Feminino" : "Outro"}</td>
                             <td>{aluno.ativo ? "Ativo" : "Inativo"}</td>
                             <td>
                                 <Link className="btn btn-sm btn-warning me-1" to={`/alunos/alterar/${aluno._id}`}>

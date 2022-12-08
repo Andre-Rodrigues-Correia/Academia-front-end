@@ -44,12 +44,8 @@ const Alteracao = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        validator
-            .validate(inputs, { abortEarly: false })
-            .then(() => {
-                setErrors({});
                 axios
-                    .put(`http://localhost:8080/api/alunos/${idAluno}`, inputs)
+                    .put(`http://localhost:8080/api/alunos/${idAluno}`, inputs, { withCredentials: true })
                     .then((response) => {
                         if (response.status === 200) {
                             modal.show();
@@ -60,13 +56,6 @@ const Alteracao = () => {
                     .catch((error) => {
                         console.log(error);
                     });
-            })
-            .catch((error) => {
-                setErrors({});
-                error.inner.forEach((err) => {
-                    setErrors((prevErrors) => ({ ...prevErrors, [err.path]: err.message }));
-                });
-            });
     }
 
     function closeModalAndRedirect() {
@@ -79,7 +68,7 @@ const Alteracao = () => {
         setModal(informModal);
         setInputs({ ...inputs, id: idAluno });
         axios
-            .get(`http://localhost:8080/api/alunos/${idAluno}`)
+            .get(`http://localhost:8080/api/alunos/${idAluno}`, { withCredentials: true })
             .then((response) => {
                 if (response.status === 200) {
                     setInputs(response.data);
